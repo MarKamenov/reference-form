@@ -1,0 +1,49 @@
+form {
+    display: grid;
+    gap: 20px;
+}
+
+fieldset,
+input {
+    display: grid;
+    width: 100%;
+    gap: 1rem;
+    border: 3px solid black
+}
+
+fieldset {
+    padding: .7rem;
+}
+
+legend {
+    margin-left: 1rem;
+}
+
+.field {
+    width: 60%;
+}
+
+.date__wrapper {
+    display: flex;
+    justify-content: space-between;
+
+    &__form {
+        width: 40%
+    }
+}
+
+.actions {
+    margin-left: auto;
+
+    &__cancel {
+        margin-right: 1.5rem;
+        text-decoration: underline;
+        color: rgb(43, 180, 234)
+    }
+
+    &__submit {
+        border: 2px solid, ;
+        box-shadow: 2px 2px black;
+        padding-inline: 5px;
+    }
+}

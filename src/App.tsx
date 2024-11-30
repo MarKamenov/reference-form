@@ -1,26 +1,18 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom';
 
-function App() {
+import { ReferenceForm } from 'src/pages'
+import appStyles from './App.module.scss';
+
+export const App = () => {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <main className={appStyles.app__wrapper}>
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<Navigate to="/reference" replace />} />
+          <Route path="/reference" element={<ReferenceForm />} />
+          <Route path="*" element={<div>404: Not Found</div>} />
+        </Routes>
+      </BrowserRouter>
+    </main>
   );
 }
-
-export default App;
