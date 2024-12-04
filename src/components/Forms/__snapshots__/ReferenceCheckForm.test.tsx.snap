@@ -131,6 +131,7 @@ exports[`FormField component should match snapshot 1`] = `
       >
         <button
           class="actions__cancel"
+          type="button"
         >
           Cancel
         </button>

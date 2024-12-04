@@ -49,11 +49,17 @@
         "./src/pages/*"
       ],
       "hooks/*": [
-        "./src/hooks/*"
+        "src/services/*"
       ],
       "hooks": [
-        "./src/hooks"
+        "src/services"
       ],
+      "utils/*": [
+        "./src/utils/*"
+      ],
+      "utils": [
+        "./src/utils"
+      ]
     }
   },
   "include": [

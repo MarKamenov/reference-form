@@ -9,7 +9,7 @@ exports[`ReferenceForm page should match snapshot 1`] = `
       class="title"
       data-testid="heading"
     >
-      Goodlord Referencing form
+      Referencing form
     </h1>
     <div>
       <form
@@ -140,6 +140,7 @@ exports[`ReferenceForm page should match snapshot 1`] = `
         >
           <button
             class="actions__cancel"
+            type="button"
           >
             Cancel
           </button>

@@ -19,7 +19,7 @@ describe('Title component', () => {
 
     test('should render default title text', () => {
         render(<Title />);
-        const title = 'Goodlord Referencing form'
+        const title = 'Referencing form'
         const heading = screen.getByTestId('heading')
 
         expect(heading.textContent).toBe(title)

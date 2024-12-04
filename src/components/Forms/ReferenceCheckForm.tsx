@@ -1,7 +1,8 @@
-import { ChangeEvent, FormEvent, Fragment, useState } from "react";
+import { ChangeEvent, FormEvent, Fragment, useRef, useState } from "react";
 import { EmployerKeys, FormState } from "src/types";
 import { FormField } from './FormField'
 import referenceCheckFormStyles from './ReferenceCheckForm.module.scss'
+import { saveReferenceForm } from "src/services/formsService";
 
 export const ReferenceCheckForm = () => {
     const [formData, setFormData] = useState<FormState>({
@@ -12,6 +13,8 @@ export const ReferenceCheckForm = () => {
         },
         employers: [{ name: '', startDate: '', endDate: '' }],
     });
+    const [saveError, setSaveError] = useState<{ message: string; stack: string } | null>(null);
+    const savedValuesRef = useRef<FormState>(formData);
 
     const handlePersonalChange = (e: ChangeEvent<HTMLInputElement>) => {
         const { name, value } = e.target;
@@ -30,42 +33,27 @@ export const ReferenceCheckForm = () => {
         }));
     };
 
+    const revertFormData = () => {
+        setFormData(savedValuesRef.current);
+    }
 
     const handleSubmit = async (e: FormEvent) => {
         e.preventDefault();
-        const body = JSON.stringify({
-            personal: {
-                first_name: formData.personal.firstName,
-                last_name: formData.personal.lastName,
-                current_address: formData.personal.currentAddress,
-            },
-            employer: formData.employers.map(emp => ({
-                name: emp.name,
-                start_date: emp.startDate,
-                end_date: emp.endDate,
-            })),
-        })
+        savedValuesRef.current = formData;
         try {
-            const response = await fetch('https://ref-api.goodlord.co/reference/new', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body
-            });
-            if (response.ok) {
-                alert('Reference check submitted successfully!');
-            } else {
-                throw new Error('Failed to submit reference check');
-            }
-        } catch (error) {
+            const data = await saveReferenceForm(formData)
+            console.log('Data saved', data)
+            setSaveError(null)
+        } catch (error: unknown) {
             console.error('Error:', error);
-            alert('Failed to submit reference check. Please try again.');
+            setSaveError(error as { message: string; stack: string });
+
         }
     };
 
     return (
         <div>
+            {saveError && <p>{saveError.message}</p>}
             <form aria-label="signup-form" data-testid="form" onSubmit={handleSubmit}>
                 <fieldset className={referenceCheckFormStyles.fieldset}>
                     <legend>Personal</legend>
@@ -141,7 +129,7 @@ export const ReferenceCheckForm = () => {
                     ))}
                 </fieldset>
                 <div className={referenceCheckFormStyles.actions}>
-                    <button className={referenceCheckFormStyles.actions__cancel}>
+                    <button type='button' onClick={revertFormData} className={referenceCheckFormStyles.actions__cancel}>
                         Cancel
                     </button>
                     <button className={referenceCheckFormStyles.actions__submit} type="submit">

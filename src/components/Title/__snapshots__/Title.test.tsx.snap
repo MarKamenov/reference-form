@@ -6,7 +6,7 @@ exports[`Title component should match snapshot 1`] = `
     class="title"
     data-testid="heading"
   >
-    Goodlord Referencing form
+    Referencing form
   </h1>
 </div>
 `;
