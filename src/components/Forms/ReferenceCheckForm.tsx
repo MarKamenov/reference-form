@@ -100,7 +100,7 @@ export const ReferenceCheckForm = () => {
                                     id={`employerName-${index}`}
                                     name="name"
                                     value={employer.name}
-                                    handleChange={(e) => handleEmployerChange(index, 'name', e.target.value)}
+                                    handleChange={(e) => handleEmployerChange(index, e.target.name as EmployerKeys, e.target.value)}
                                     required />
                             </div>
                             <div className={`${referenceCheckFormStyles.date__wrapper} ${referenceCheckFormStyles.field}`}>
@@ -111,7 +111,7 @@ export const ReferenceCheckForm = () => {
                                         id={`startDate-${index}`}
                                         name="startDate"
                                         value={employer.startDate}
-                                        handleChange={(e) => handleEmployerChange(index, 'startDate', e.target.value)}
+                                        handleChange={(e) => handleEmployerChange(index, e.target.name as EmployerKeys, e.target.value)}
                                         required />
                                 </div>
                                 <div className={referenceCheckFormStyles.date__wrapper__form}>
@@ -121,7 +121,7 @@ export const ReferenceCheckForm = () => {
                                         id={`endDate-${index}`}
                                         name="endDate"
                                         value={employer.endDate}
-                                        handleChange={(e) => handleEmployerChange(index, 'endDate', e.target.value)}
+                                        handleChange={(e) => handleEmployerChange(index, e.target.name as EmployerKeys, e.target.value)}
                                     />
                                 </div>
                             </div>
