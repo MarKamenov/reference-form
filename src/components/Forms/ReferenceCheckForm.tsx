@@ -53,7 +53,7 @@ export const ReferenceCheckForm = () => {
 
     return (
         <div>
-            {saveError && <p>{saveError.message}</p>}
+            {saveError && <p style={{ color: 'red' }}>{saveError.message}</p>}
             <form aria-label="signup-form" data-testid="form" onSubmit={handleSubmit}>
                 <fieldset className={referenceCheckFormStyles.fieldset}>
                     <legend>Personal</legend>
